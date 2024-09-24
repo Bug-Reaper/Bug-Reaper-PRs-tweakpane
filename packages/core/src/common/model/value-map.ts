@@ -7,6 +7,10 @@ export interface ValueMapEvents<O extends Record<string, unknown>> {
 		key: keyof O;
 		sender: ValueMap<O>;
 	};
+	keyup: {
+		key: keyof O;
+		sender: ValueMap<O>;
+	};
 }
 
 export type ValueMapCore<O extends Record<string, unknown>> = {
@@ -27,6 +31,12 @@ export class ValueMap<O extends Record<string, unknown>> {
 			const v = this.valMap_[key];
 			v.emitter.on('change', () => {
 				this.emitter.emit('change', {
+					key: key,
+					sender: this,
+				});
+			});
+			v.emitter.on('keyup', () => {
+				this.emitter.emit('keyup', {
 					key: key,
 					sender: this,
 				});

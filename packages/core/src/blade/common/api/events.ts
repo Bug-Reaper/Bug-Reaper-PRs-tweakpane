@@ -3,4 +3,5 @@ import {TpChangeEvent} from './tp-event.js';
 
 export interface ApiChangeEvents<T> {
 	change: TpChangeEvent<T, BladeApi>;
+	keyup: TpChangeEvent<T, BladeApi>;
 }

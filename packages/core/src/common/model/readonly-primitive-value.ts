@@ -19,10 +19,12 @@ export class ReadonlyPrimitiveValue<T> implements ReadonlyValue<T> {
 	constructor(value: Value<T>) {
 		this.onValueBeforeChange_ = this.onValueBeforeChange_.bind(this);
 		this.onValueChange_ = this.onValueChange_.bind(this);
+		this.onKeyUp_ = this.onKeyUp_.bind(this);
 
 		this.value_ = value;
 		this.value_.emitter.on('beforechange', this.onValueBeforeChange_);
 		this.value_.emitter.on('change', this.onValueChange_);
+		this.value_.emitter.on('keyup', this.onKeyUp_);
 	}
 
 	/**
@@ -41,6 +43,12 @@ export class ReadonlyPrimitiveValue<T> implements ReadonlyValue<T> {
 
 	private onValueChange_(ev: ValueEvents<T>['change']): void {
 		this.emitter.emit('change', {
+			...ev,
+			sender: this,
+		});
+	}
+	private onKeyUp_(ev: ValueEvents<T>['keyup']): void {
+		this.emitter.emit('keyup', {
 			...ev,
 			sender: this,
 		});

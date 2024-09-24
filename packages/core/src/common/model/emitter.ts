@@ -73,6 +73,7 @@ export class Emitter<E> {
 		event: E[EventName],
 	): void {
 		const observers = this.observers_[eventName];
+		console.log("👁️ : -<<<<><>",observers)
 		if (!observers) {
 			return;
 		}

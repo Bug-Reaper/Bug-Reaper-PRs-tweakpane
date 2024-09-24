@@ -13,9 +13,18 @@ export function bindValue<T>(
 	value.emitter.on(
 		'change',
 		(ev: ValueEvents<T>['change'] | ReadonlyValueEvents<T>['change']) => {
+			console.log("onchange emitter reactive")
 			applyValue(ev.rawValue);
 		},
 	);
+	/*
+	value.emitter.on(
+		'keyup',
+		(ev: ValueEvents<T>['keyup'] | ReadonlyValueEvents<T>['keyup']) => {
+			console.log("huh",ev)
+			applyValue(ev.rawValue);
+		},
+	);*/
 	applyValue(value.rawValue);
 }
 

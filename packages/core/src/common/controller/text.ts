@@ -27,6 +27,7 @@ export class TextController<T> implements ValueController<T, TextView<T>> {
 
 	constructor(doc: Document, config: Config<T>) {
 		this.onInputChange_ = this.onInputChange_.bind(this);
+		this.onKeyUp_ = this.onKeyUp_.bind(this);
 
 		this.parser_ = config.parser;
 		this.props = config.props;
@@ -39,6 +40,7 @@ export class TextController<T> implements ValueController<T, TextView<T>> {
 			viewProps: this.viewProps,
 		});
 		this.view.inputElement.addEventListener('change', this.onInputChange_);
+		this.view.inputElement.addEventListener('keyup', this.onKeyUp_);
 	}
 
 	private onInputChange_(e: Event): void {
@@ -50,5 +52,23 @@ export class TextController<T> implements ValueController<T, TextView<T>> {
 			this.value.rawValue = parsedValue;
 		}
 		this.view.refresh();
+	}
+	private onKeyUp_(e: Event): void {
+		const inputElem: HTMLInputElement = forceCast(e.currentTarget);
+		const value = inputElem.value;
+		console.log("keyup - from core/text.ts")
+		console.log(this,e)
+		const parsedValue = this.parser_(value);
+		if (!isEmpty(parsedValue)) {
+			this.value.emitter.emit('keyup', {
+				//rawValue:ev.value,
+				rawValue: parsedValue,
+				options: { forceEmit: true, last: true },
+				previousRawValue: this.value.rawValue,
+				sender: this.value
+			})
+			//this.value.rawValue = parsedValue;
+		}
+		//this.view.refresh();
 	}
 }

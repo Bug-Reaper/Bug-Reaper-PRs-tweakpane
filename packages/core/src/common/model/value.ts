@@ -21,6 +21,12 @@ export interface ValueEvents<T, V = Value<T>> {
 		rawValue: T;
 		sender: V;
 	};
+	keyup:{
+		options: ValueChangeOptions;
+		previousRawValue: T;
+		rawValue: T;
+		sender: V;
+	};
 }
 
 /**

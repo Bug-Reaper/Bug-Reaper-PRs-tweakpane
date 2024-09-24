@@ -17,6 +17,7 @@
     "coverage:merge:tweakpane": "nyc merge packages/tweakpane/.nyc_output .nyc_output/tweakpane.json",
     "coverage:package": "run-s coverage:package:*",
     "coverage:package:core": "(cd packages/core && npm install && npm run coverage)",
+    "fuck:build": "(cd packages/core && npm run build && cd ../tweakpane && sleep 4 && echo SLEeePoVer && npm run build && echo herererer && mv docs/assets/tweakpane.min.js ../../../releaseday/soundsafari/node_modules/tweakpane/dist/tweakpane.min.js)",
     "coverage:package:tweakpane": "(cd packages/tweakpane && npm install && npm run coverage)",
     "coverage:prepare": "mkdirp .nyc_output",
     "coverage:report": "nyc report --reporter=lcov",

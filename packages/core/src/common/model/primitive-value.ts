@@ -48,5 +48,11 @@ export class PrimitiveValue<T> implements Value<T> {
 			rawValue: this.value_,
 			sender: this,
 		});
+		this.emitter.emit('keyup', {
+			options: opts,
+			previousRawValue: prevValue,
+			rawValue: this.value_,
+			sender: this,
+		});
 	}
 }

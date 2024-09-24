@@ -20,9 +20,12 @@ export class TextBladeApi<T>
 	 */
 	constructor(controller: LabeledValueBladeController<T, TextController<T>>) {
 		super(controller);
-
 		this.controller.value.emitter.on('change', (ev) => {
 			this.emitter_.emit('change', new TpChangeEvent(this, ev.rawValue));
+		});
+		this.controller.value.emitter.on('keyup', (ev) => {
+			console.log("evlabciewbc")
+			this.emitter_.emit('keyup', new TpChangeEvent(this, ev.rawValue));
 		});
 	}
 
@@ -54,6 +57,7 @@ export class TextBladeApi<T>
 		eventName: EventName,
 		handler: (ev: ApiChangeEvents<T>[EventName]) => void,
 	): this {
+		console.log("bladerunner")
 		const bh = handler.bind(this);
 		this.emitter_.on(
 			eventName,

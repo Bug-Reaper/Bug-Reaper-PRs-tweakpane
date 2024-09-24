@@ -34,6 +34,7 @@ export class TextView<T> implements View, InputView {
 
 	constructor(doc: Document, config: Config<T>) {
 		this.onChange_ = this.onChange_.bind(this);
+		this.onKeyUp_ = this.onKeyUp_.bind(this);
 
 		this.element = doc.createElement('div');
 		this.element.classList.add(cn());
@@ -41,7 +42,7 @@ export class TextView<T> implements View, InputView {
 
 		this.props_ = config.props;
 		this.props_.emitter.on('change', this.onChange_);
-
+		this.props_.emitter.on('keyup', this.onKeyUp_)
 		const inputElem = doc.createElement('input');
 		inputElem.classList.add(cn('i'));
 		inputElem.type = 'text';
@@ -50,6 +51,7 @@ export class TextView<T> implements View, InputView {
 		this.inputElement = inputElem;
 
 		config.value.emitter.on('change', this.onChange_);
+		config.value.emitter.on('keyup', this.onKeyUp_);
 		this.value_ = config.value;
 
 		this.refresh();
@@ -62,5 +64,9 @@ export class TextView<T> implements View, InputView {
 
 	private onChange_(): void {
 		this.refresh();
+	}
+	private onKeyUp_():void {
+		console.log("keyup - text.ts")
+		this.refresh()
 	}
 }
