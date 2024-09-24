@@ -63,7 +63,7 @@ export class TextController<T> implements ValueController<T, TextView<T>> {
 			this.value.emitter.emit('keyup', {
 				//rawValue:ev.value,
 				rawValue: parsedValue,
-				options: { forceEmit: true, last: true },
+				options: { forceEmit: true, last: false },
 				previousRawValue: this.value.rawValue,
 				sender: this.value
 			})
