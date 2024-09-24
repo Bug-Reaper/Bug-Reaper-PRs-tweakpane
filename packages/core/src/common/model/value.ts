@@ -21,6 +21,9 @@ export interface ValueEvents<T, V = Value<T>> {
 		rawValue: T;
 		sender: V;
 	};
+	keyup:{
+		event: Event;
+	}
 }
 
 /**

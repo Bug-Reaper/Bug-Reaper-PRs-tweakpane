@@ -1,9 +1,9 @@
-import {forceCast, isEmpty} from '../../misc/type-util.js';
-import {Parser} from '../converter/parser.js';
-import {Value} from '../model/value.js';
-import {ViewProps} from '../model/view-props.js';
-import {TextProps, TextView} from '../view/text.js';
-import {ValueController} from './value.js';
+import { forceCast, isEmpty } from '../../misc/type-util.js';
+import { Parser } from '../converter/parser.js';
+import { Value } from '../model/value.js';
+import { ViewProps } from '../model/view-props.js';
+import { TextProps, TextView } from '../view/text.js';
+import { ValueController } from './value.js';
 
 /**
  * @hidden
@@ -27,6 +27,7 @@ export class TextController<T> implements ValueController<T, TextView<T>> {
 
 	constructor(doc: Document, config: Config<T>) {
 		this.onInputChange_ = this.onInputChange_.bind(this);
+		this.onKeyUp_ = this.onKeyUp_.bind(this);
 
 		this.parser_ = config.parser;
 		this.props = config.props;
@@ -39,6 +40,7 @@ export class TextController<T> implements ValueController<T, TextView<T>> {
 			viewProps: this.viewProps,
 		});
 		this.view.inputElement.addEventListener('change', this.onInputChange_);
+		this.view.inputElement.addEventListener('keyup', this.onKeyUp_);
 	}
 
 	private onInputChange_(e: Event): void {
@@ -50,5 +52,10 @@ export class TextController<T> implements ValueController<T, TextView<T>> {
 			this.value.rawValue = parsedValue;
 		}
 		this.view.refresh();
+	}
+	private onKeyUp_(e: Event): void {
+		console.log(e)
+		this.value.emitter.emit('keyup',{event:e})
+		//this.view.refresh();
 	}
 }
