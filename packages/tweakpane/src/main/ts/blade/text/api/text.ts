@@ -26,7 +26,7 @@ export class TextBladeApi<T>
 			this.emitter_.emit('change', new TpChangeEvent(this, ev.rawValue));
 		});
 		this.controller.value.emitter.on('keyup', (ev) => {
-			this.emitter_.emit('keyup', ev.event);
+			this.emitter_.emit('keyup', ev);
 			console.log(ev)
 		});
 	}

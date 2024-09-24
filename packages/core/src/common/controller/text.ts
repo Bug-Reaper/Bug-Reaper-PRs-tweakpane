@@ -55,7 +55,7 @@ export class TextController<T> implements ValueController<T, TextView<T>> {
 	}
 	private onKeyUp_(e: Event): void {
 		console.log(e)
-		this.value.emitter.emit('keyup',{event:e})
+		this.value.emitter.emit('keyup',e)
 		//this.view.refresh();
 	}
 }
