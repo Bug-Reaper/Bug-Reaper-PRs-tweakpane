@@ -42,6 +42,22 @@ export class TpChangeEvent<T, Target = unknown> extends TpEvent<Target> {
 	}
 }
 
+export class TpNativeEvent<Target = unknown> extends TpEvent<Target> {
+	/**
+	 * The native event
+	 */
+		public readonly native: Event;
+
+		/**
+		 * @hidden
+		 */
+		constructor(target: Target, nativeEvent: Event) {
+			super(target);
+
+			this.native = nativeEvent;
+		}
+}
+
 /**
  * An event class for folder.
  * @template Target The event target.

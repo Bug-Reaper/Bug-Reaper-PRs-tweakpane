@@ -7,6 +7,7 @@ import {
 	LabeledValueBladeController,
 	TextController,
 	TpChangeEvent,
+	//TpNativeEvent
 } from '@tweakpane/core';
 
 export class TextBladeApi<T>
@@ -23,6 +24,10 @@ export class TextBladeApi<T>
 
 		this.controller.value.emitter.on('change', (ev) => {
 			this.emitter_.emit('change', new TpChangeEvent(this, ev.rawValue));
+		});
+		this.controller.value.emitter.on('keyup', (ev) => {
+			this.emitter_.emit('keyup', ev.event);
+			console.log(ev)
 		});
 	}
 

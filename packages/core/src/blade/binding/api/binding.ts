@@ -9,6 +9,7 @@ import {BindingController} from '../controller/binding.js';
 
 export interface BindingApiEvents<Ex> {
 	change: TpChangeEvent<Ex, BindingApi<unknown, Ex>>;
+	//keyup:Event
 }
 
 /**
